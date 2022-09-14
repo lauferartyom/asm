@@ -5,6 +5,9 @@ section .data
    msg db "А меньше B"
    lenMsg equ $ - msg
 
+   newLineMsg db 0xA, 0xD
+   newLineLen equ $-newLineMsg
+
 section .bss
    s resb 1024
    len resd 1
@@ -56,6 +59,12 @@ _start:
    int 80h
 
    pol:
+
+   mov edx, newLineLen
+   mov ecx, newLineMsg
+   mov ebx, 1
+   mov eax, 4
+   int 0x80
 
    mov eax, 1
    
